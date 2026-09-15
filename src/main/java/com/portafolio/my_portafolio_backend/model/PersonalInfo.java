@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.URL;
 
 @Data
 @AllArgsConstructor
@@ -37,9 +38,9 @@ public class PersonalInfo {
     @NotBlank(message = "El telefono no puede estar vacío")
     private String phone;
 
-    @NotBlank(message = "Linkedin es una red obligatoria")
+    @URL(message = "Linkedin es una red obligatoria")
     private String linkedinUrl;
 
-    @NotBlank(message = "Github es una red obligatoria")
+    @URL(message = "Github es una red obligatoria")
     private String githubUrl;
 }
