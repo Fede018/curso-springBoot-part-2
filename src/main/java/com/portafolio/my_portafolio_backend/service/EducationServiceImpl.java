@@ -1,9 +1,14 @@
 package com.portafolio.my_portafolio_backend.service;
 
+import com.portafolio.my_portafolio_backend.exception.ValidationException;
 import com.portafolio.my_portafolio_backend.model.Education;
 import com.portafolio.my_portafolio_backend.repository.IEducationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,38 +18,41 @@ import java.util.Optional;
 public class EducationServiceImpl implements IEducationService{
 
     private final IEducationRepository educationRepository;
+    private final Validator validator;
 
     @Override
+    @Transactional
     public Education save(Education education) {
-        // Validación 1: Asegurar que la fecha de incio no sea nula, como exige la BD
-        if (education.getStartDate() == null) {
-            throw new IllegalArgumentException("Le fecha de inicio de la educación no puede estar vacía.");
-        }
-
-        // Validación 2: La fecha de incio no puede ser posterior a la de fin
-        if(education.getEndDate() != null && education.getStartDate().isAfter(education.getEndDate())) {
-            throw new IllegalArgumentException("La fecha de inicio de la educación no puede ser posterior a la fecha de fin");
+        BindingResult result = new BeanPropertyBindingResult(education, "education");
+        validator.validate(education, result);
+        if (result.hasErrors()){
+            System.out.println("Erorres de validación encontrados: " + result.getAllErrors());
+            throw new ValidationException(result);
         }
 
         return educationRepository.save(education);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Education> findById(Long id) {
         return educationRepository.findById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Education> findAll() {
         return educationRepository.findAll();
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         educationRepository.deleteById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Education> findByPersonalInfoId(Long personalInfoId) {
         return educationRepository.findByPersonalInfoId(personalInfoId);
     }
