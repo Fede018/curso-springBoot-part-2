@@ -14,5 +14,5 @@ public class Project {
     private String description;
     private String imageUrl; // URL o ruta de la imagen del proyecto
     private String projectUrl; //URL al proyecto desplegado (si existe) o github
-    private Long personalInfo; //Clave foranea o PersonalInfo
+    private Long personalInfoId; //Clave foranea o PersonalInfo
 }
