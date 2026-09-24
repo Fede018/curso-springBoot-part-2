@@ -8,7 +8,7 @@ INSERT INTO skills (name, level_percentage, icon_class, personal_info_id) VALUES
                                                                               ('HTML', 95, 'img/logos/html-5.png', 1),
                                                                               ('CSS', 90, 'img/logos/css-3.png', 1),
                                                                               ('JavaScript', 75, 'img/logos/js.png', 1),
-                                                                              ('C', 70, 'img/logos/logotipo-de-c-.png', 1);
+                                                                              ('C', 70, 'img/logos/logotipo-de-c.png', 1);
 
 INSERT INTO educations (degree, institution, start_date, end_date, description, personal_info_id) VALUES
                                                                                                       ('Ingeniería en Sistemas', 'Universidad XYZ', '2015-03-01', '2020-12-15', 'Especialización en desarrollo de software y bases de datos.', 1),

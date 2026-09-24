@@ -1,14 +1,10 @@
 package com.portafolio.my_portafolio_backend.service;
 
-import com.portafolio.my_portafolio_backend.exception.ValidationException;
 import com.portafolio.my_portafolio_backend.model.Education;
 import com.portafolio.my_portafolio_backend.repository.IEducationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,18 +14,10 @@ import java.util.Optional;
 public class EducationServiceImpl implements IEducationService{
 
     private final IEducationRepository educationRepository;
-    private final Validator validator;
 
     @Override
     @Transactional
     public Education save(Education education) {
-        BindingResult result = new BeanPropertyBindingResult(education, "education");
-        validator.validate(education, result);
-        if (result.hasErrors()){
-            System.out.println("Erorres de validación encontrados: " + result.getAllErrors());
-            throw new ValidationException(result);
-        }
-
         return educationRepository.save(education);
     }
 
@@ -48,6 +36,7 @@ public class EducationServiceImpl implements IEducationService{
     @Override
     @Transactional
     public void deleteById(Long id) {
+        System.out.println("Eliminando education por ID: " + id + " en el servicio...");
         educationRepository.deleteById(id);
     }
 

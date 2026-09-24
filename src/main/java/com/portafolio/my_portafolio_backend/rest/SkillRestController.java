@@ -13,11 +13,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/skill")
-public class SkillController {
+public class SkillRestController {
 
     private final ISkillService skillService;
 
-    public SkillController(ISkillService skillService) {
+    public SkillRestController(ISkillService skillService) {
         this.skillService = skillService;
     }
 
