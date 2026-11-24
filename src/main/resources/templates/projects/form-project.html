@@ -18,6 +18,17 @@
 
 <main>
     <div class="container">
+        <div class="admin-section">
+            <button class="btn-logout" type="button" th:onclick="|window.location.href='@{/projects}'|">
+                Ver Proyectos
+            </button>
+
+            <form th:action="@{/logout}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <button type="submit" class="btn-logout">Cerrar Sesion</button>
+            </form>
+        </div>
+
         <section id="contact">
             <h2>Formulario de Proyecto</h2>
             <form class="contact-form" th:action="@{/projects/save}" th:object="${projectDTO}" method="post" enctype="multipart/form-data">

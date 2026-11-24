@@ -20,8 +20,14 @@
     <div class="container">
         <section class="admin-section">
             <div class="admin-actions">
-                <a th:ref="@{/skills/new}">Crear Nueva Habilidad</a>
-                <a th:ref="@{/logout}">Cerrar Sesión</a>
+                <button class="btn-logout" type="button" th:onclick="|window.location.href='@{/skills/new}'|">
+                    Crear Nueva Habilidad
+                </button>
+
+                <form th:action="@{/logout}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <button type="submit" class="btn-logout">Cerrar Sesion</button>
+                </form>
             </div>
             <h2>Lista de Habilidades</h2>
 
